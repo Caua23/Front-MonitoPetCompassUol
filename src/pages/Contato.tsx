@@ -1,0 +1,8 @@
+export function Contato(){
+    return(
+        <>
+            
+        </>
+    )
+}
+
