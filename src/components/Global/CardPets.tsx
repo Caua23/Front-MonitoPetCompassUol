@@ -1,24 +1,27 @@
+import { useNavigate } from "react-router";
 import { CardPetsProps } from "../../interface/CardPets";
 
 export function CardPets({
   id,
   name,
-  image,
+  imgs,
   price,
   age,
   gender,
 }: CardPetsProps) {
+  const navigate = useNavigate();
   return (
     <article
+      onClick={() => navigate(`/pet/${id}`)}
       id={id.toString()}
       className="
-      hover:scale-104 transition-transform duration-500
+      hover:scale-104 cursor-pointer transition-transform duration-500
       bg-[#ebebeb] w-[280px] h-[378px] p-2 gap-2 rounded-[12px] flex flex-col 
       "
     >
       <figure>
         <img
-          src={image}
+          src={imgs[0].url}
           alt={`Picture of ${name}`}
           width={264}
           height={264}
@@ -42,7 +45,7 @@ export function CardPets({
           </p>
         </div>
 
-        <p className="text-[#00171F] text-[16px] font-bold mt-1">{price} BRL</p>
+        <p className="text-[#00171F] text-[16px] font-bold mt-1">R$ {price}</p>
       </div>
     </article>
   );
