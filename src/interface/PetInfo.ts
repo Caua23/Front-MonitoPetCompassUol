@@ -11,5 +11,5 @@ export interface PetInfo {
   color: string;
   location: string;
   publishedDate: string;
-  additionalInfo: string;
+  addInformation: string;
 }

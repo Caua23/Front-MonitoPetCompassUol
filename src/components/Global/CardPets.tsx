@@ -45,7 +45,7 @@ export function CardPets({
           </p>
         </div>
 
-        <p className="text-[#00171F] text-[16px] font-bold mt-1">R$ {price}</p>
+        <p className="text-[#00171F] text-[16px] font-bold mt-1">R$ {price.toLocaleString()}</p>
       </div>
     </article>
   );
