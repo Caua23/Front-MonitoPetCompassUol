@@ -44,8 +44,8 @@ export function Modal({
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-[rgba(0,0,0,0.8)] z-50 w-full">
-      <div className="bg-white p-6 rounded shadow-md w-full max-w-xl relative">
+    <div className="fixed inset-0 flex items-center justify-center  bg-[rgba(0,0,0,0.8)] z-50 w-full">
+      <div className="bg-white p-6  shadow-md w-full rounded-2xl max-w-xl relative">
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-600 hover:text-red-500"

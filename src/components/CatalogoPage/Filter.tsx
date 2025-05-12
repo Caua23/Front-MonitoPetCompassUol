@@ -1,15 +1,19 @@
-import { useState } from "react";
-import { useParams } from "react-router";
-
-export function Filter() {
-  const { category } = useParams();
-  const [male, setMale] = useState(false);
-  const [female, setFemale] = useState(false);
-  const [color, setColor] = useState<string[]>([]);
-  const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
-  const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
-  const [size, setSize] = useState<string[]>([]);
-
+import { FilterProps } from "../../interface/FilterProps";
+export function Filter({
+  category,
+  male,
+  female,
+  color,
+  size,
+  onMaleChange,
+  onFemaleChange,
+  onColorChange,
+  onSizeChange,
+  minPrice,
+  maxPrice,
+  setMinPrice,
+  setMaxPrice,
+}: FilterProps) {
   const colors = [
     { color: "Red", bg: "bg-red-500" },
     { color: "Apricot", bg: "bg-[#FFB672]" },
@@ -17,7 +21,6 @@ export function Filter() {
     { color: "Silver", bg: "bg-gray-400" },
     { color: "Tan", bg: "bg-[#FFF7CE]" },
   ];
-
   return (
     <aside className={`w-56 ${category === "pet" ? "h-[750px]" : "h-[400px]"}  ml-5 mb-5 bg-white border border-gray-300 rounded-lg p-4 shadow-md`}>
       <h2 className="text-[#003459] text-2xl">Filter</h2>
@@ -35,10 +38,7 @@ export function Filter() {
               name="gender"
               value="Male"
               checked={male}
-              onChange={(e) => {
-                setMale(e.target.checked);
-                if (e.target.checked) setFemale(false);
-              }}
+              onChange={(e) => { onMaleChange(e.target.checked) }}
             />
             <span>Male</span>
           </label>
@@ -50,10 +50,7 @@ export function Filter() {
               name="gender"
               value="Female"
               checked={female}
-              onChange={(e) => {
-                setFemale(e.target.checked);
-                if (e.target.checked) setMale(false);
-              }}
+              onChange={(e) => onFemaleChange(e.target.checked)}
             />
             <span>Female</span>
           </label>
@@ -72,12 +69,9 @@ export function Filter() {
                 className="w-4 h-4 rounded-md border border-gray-400 appearance-none cursor-pointer checked:bg-blue-500 checked:border-blue-500"
                 type="checkbox"
                 name="color"
-                value={colorName}
                 checked={color.includes(colorName)}
-                onChange={(e) => {
-                  if (e.target.checked) setColor([...color, e.target.value]);
-                  else setColor(color.filter((c) => c !== e.target.value));
-                }}
+                onChange={() => onColorChange(colorName)}
+
               />
               <div className={`w-6 h-6 rounded-full ${bg}`} />
               <span>{colorName}</span>
@@ -86,16 +80,13 @@ export function Filter() {
 
           <label className="inline-flex items-center gap-2 cursor-pointer">
             <input
-              className="w-4 h-4 rounded-md border border-gray-400 appearance-none cursor-pointer checked:bg-blue-500 checked:border-blue-500"
               type="checkbox"
               name="color"
-              value="BlackWhite"
-              checked={color.includes("BlackWhite")}
-              onChange={(e) => {
-                if (e.target.checked) setColor([...color, e.target.value]);
-                else setColor(color.filter((c) => c !== e.target.value));
-              }}
+              value="Black & White"
+              checked={color.includes("Black & White")}
+              onChange={() => onColorChange("Black & White")}
             />
+
             <div className="relative w-6 h-6 rounded-full overflow-hidden border border-gray-400">
               <div className="absolute top-0 left-0 w-1/2 h-full bg-neutral-900" />
               <div className="absolute top-0 right-0 w-1/2 h-full bg-white" />
@@ -144,10 +135,7 @@ export function Filter() {
                 name="size"
                 value={sizeName}
                 checked={size.includes(sizeName)}
-                onChange={(e) => {
-                  if (e.target.checked) setSize([...size, e.target.value]);
-                  else setSize(size.filter((s) => s !== e.target.value));
-                }}
+                onChange={() => onSizeChange(sizeName)}
               />
               <span>{sizeName}</span>
             </label>

@@ -9,7 +9,7 @@ export function Pet() {
   if (id === undefined) {
     return (
       <>
-        <Header />
+        <Header IsFixed={false} />
           <h1 className="text-center text-5xl text-[#003459] mt-20 mb-20">Nenhum pet selecionado</h1>
         <Footer />
       </>
@@ -18,7 +18,7 @@ export function Pet() {
   return (
     
     <>
-      <Header />
+      <Header IsFixed={false}  />
       <PetMain id={id}/>
       <Footer />
     </>

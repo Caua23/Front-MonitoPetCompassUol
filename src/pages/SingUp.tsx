@@ -10,15 +10,14 @@ export function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-const error = document.getElementById("error");
+  const [error , setError] = useState("")
   const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      if (error) {
-        error.innerText = "As senhas não coincidem";
-      }
-
+      
+      setError("As senhas não são iguais")
+      
       return;
     }
 
@@ -30,18 +29,17 @@ const error = document.getElementById("error");
       });
 
       console.log(response.data);
-      alert("Usuário cadastrado com sucesso!");
 
-      navigate("/"); 
+      navigate(`${response.data.redirect}`); 
     } catch (error) {
       console.error(error);
-      alert("Erro ao cadastrar usuário");
+      setError("Erro ao cadastrar usuário" + error);
     }
   };
 
   return (
     <main className="w-screen h-screen bg-[#f7d7a1]">
-      <img src={logo} width={150} height={150} className="fixed m-5" alt="Logo da aplicação" />
+      <img src={logo} width={150} height={150} className="cursor-pointer fixed m-5" onClick={() => navigate("/")} alt="Logo da aplicação" />
 
       <section className="w-full h-screen flex flex-col items-center justify-center">
         <div>
@@ -93,7 +91,7 @@ const error = document.getElementById("error");
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-
+             {error && <p className="text-red-500 mb-2">{error}</p>}
             <button
               type="submit"
               className="w-52 border-none rounded-2xl bg-[#003459] text-white p-2 focus:outline-none"

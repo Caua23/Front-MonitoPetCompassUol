@@ -10,6 +10,6 @@ export interface PetInfo {
   size: string;
   color: string;
   location: string;
-  publishedDate: string;
+  date: string;
   addInformation: string;
 }

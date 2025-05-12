@@ -12,7 +12,12 @@ export function CardPets({
   const navigate = useNavigate();
   return (
     <article
-      onClick={() => navigate(`/pet/${id}`)}
+      onClick={() => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });; navigate(`/pet/${id}`)
+      }}
       id={id.toString()}
       className="
       hover:scale-104 cursor-pointer transition-transform duration-500
@@ -41,7 +46,7 @@ export function CardPets({
             •
           </p>
           <p className="font-gilroy font-bold text-[12px] leading-[18px] text-[#667479]">
-            Age: <strong>{age}</strong>
+            Age: <strong>{age} Anos</strong>
           </p>
         </div>
 

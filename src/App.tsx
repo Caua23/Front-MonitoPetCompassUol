@@ -5,6 +5,7 @@ import { Catalogo } from "./pages/Catalogo";
 import { Pet } from "./pages/Pet";
 import { SignUp } from "./pages/SingUp";
 import { Login } from "./pages/Login";
+import { User } from "./pages/User";
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
           <Route path="/auth/singUp" element={< SignUp/>} />
           <Route path="/auth/login" element={< Login/>} />
           <Route path="/catalogo/:category" element={< Catalogo/>} />
+          <Route path="/user/:id" element={< User/>} />
+          
         </Routes>
       </Router>
     </>
