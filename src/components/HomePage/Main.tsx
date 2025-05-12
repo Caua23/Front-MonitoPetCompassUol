@@ -19,12 +19,15 @@ export function Main() {
   const navigate = useNavigate();
   const [pets, setPets] = useState<CardPetsProps[]>([]);
   const [products, setProducts] = useState<CardProductsProps[]>([]);
+  const api = import.meta.env.VITE_API_URL;
   useEffect(() => {
     async function fetchPets() {
       try {
-        const response = await axios.get("http://localhost:3000/products/getAll?limit=8");
+        const response = await axios.get(
+          `http://${api}/products/getAll?limit=8`
+        );
         console.log(response.data);
-        
+
         setProducts(response.data);
       } catch (error) {
         console.error("Erro ao buscar pets:", error);
@@ -32,13 +35,15 @@ export function Main() {
     }
 
     fetchPets();
-  }, []);
+  }, [api]);
   useEffect(() => {
     async function fetchPets() {
       try {
-        const response = await axios.get("http://localhost:3000/pet/getAll?limit=8");
+        const response = await axios.get(
+          `http://${api}/pet/getAll?limit=8`
+        );
         console.log(response.data);
-        
+
         setPets(response.data);
       } catch (error) {
         console.error("Erro ao buscar pets:", error);
@@ -46,7 +51,7 @@ export function Main() {
     }
 
     fetchPets();
-  }, []);
+  }, [api]);
 
   return (
     <main className="">
@@ -107,13 +112,12 @@ export function Main() {
         </div>
         <div className="ml-20 mr-20 grid grid-cols-4 gap-10">
           {pets.map((pet) => (
-            
             <CardPets
               key={pet.id}
               id={pet.id}
               age={`${pet.age} Anos`}
               gender={pet.gender}
-              imgs={pet.imgs} 
+              imgs={pet.imgs}
               name={pet.name}
               price={pet.price}
             />
@@ -153,16 +157,22 @@ export function Main() {
           </button>
         </div>
         <div className="ml-20 mr-20 grid grid-cols-4 gap-10">
-          {/* {products.map((product) => (
-            <CardProducts
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              image={product.image}
-              price={product.price}
-              product={product.product}
-            />
-          ))} */}
+          {products && products.length > 0 ? (
+            products.map((product) => (
+              <CardProducts
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                image={product.image}
+                price={product.price}
+                product={product.product}
+              />
+            ))
+          ) : (
+            <div className="text-center text-2xl text-gray-700 mt-4">
+              Nenhum produto encontrado.
+            </div>
+          )}
         </div>
       </section>
 

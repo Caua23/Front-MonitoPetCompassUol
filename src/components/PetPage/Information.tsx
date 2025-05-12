@@ -1,8 +1,9 @@
 import { MessageCircleIcon } from "lucide-react";
 import { DetailsTable } from "./DetailsTable";
+import { InformationProps } from "../../interface/Information";
 
-// Define the props for the right section
 export function Information({
+  openModal,
   id,
   name,
   price,
@@ -17,23 +18,7 @@ export function Information({
   location,
   publishedDate,
   additionalInfo,
-}: {
-  id: number;
-  name: string;
-  price: number;
-  gender: string;
-  age: string;
-  size: string;
-  color: string;
-  vaccinated: string;
-  dewormed: string;
-  cert: string;
-  microchip: string;
-  location: string;
-  publishedDate: string;
-  additionalInfo: string;
-}) {
-  // Prepare the details array for the table
+}: InformationProps) {
   const details = [
     { label: "SKU", value: `#${id.toString().padStart(7, "0")}` },
     { label: "Gender", value: gender },
@@ -56,7 +41,9 @@ export function Information({
         R$ {price.toLocaleString()}
       </p>
       <div className="flex space-x-4 mt-4">
-        <button className="bg-[#003459] cursor-pointer w-[138px] h-[44px] text-white rounded-full border-none hover:bg-[#002a45] transition">
+        <button
+        onClick={openModal}
+        className="bg-[#003459] cursor-pointer w-[138px] h-[44px] text-white rounded-full border-none hover:bg-[#002a45] transition">
           Contact us
         </button>
         <button className="flex items-center cursor-pointer justify-center border-2 border-[#003459] w-[200px] h-[44px] text-[#003459] rounded-full bg-transparent hover:bg-[#003459] hover:text-white transition">

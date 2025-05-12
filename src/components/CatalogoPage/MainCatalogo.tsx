@@ -15,15 +15,15 @@ export function MainCatalogo() {
   const [products, setProducts] = useState<CardProductsProps[]>([]);
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 15;
-
+  const api = import.meta.env.VITE_API_URL;
   useEffect(() => {
     async function fetchData() {
       try {
         if (category === "pet") {
-          const response = await axios.get(`http://localhost:3000/pet/getAll`);
+          const response = await axios.get(`http://${api}/pet/getAll`);
           setPets(response.data);
         } else if (category === "products") {
-          const response = await axios.get(`http://localhost:3000/products/getAll`);
+          const response = await axios.get(`http://${api}/products/getAll`);
           setProducts(response.data);
         }
       } catch (error) {
@@ -32,10 +32,7 @@ export function MainCatalogo() {
     }
 
     fetchData();
-  }, [category]);
-
-  // const dataPets = category === "pet" ? pets : [];
-  // const dataProducts = category === "products" ? products : [];
+  }, [category, api]);
 
   const data = category === "pet" ? pets : products;
   const endOffset = itemOffset + itemsPerPage;
@@ -78,7 +75,7 @@ export function MainCatalogo() {
             <CardProducts
               key={product.id}
               id={product.id}
-              image={product.image} 
+              image={product.image}
               name={product.name}
               price={product.price}
               product={product.product}

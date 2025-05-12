@@ -4,6 +4,7 @@ import Banner4 from "../assets/banner4.png";
 import { Footer } from "../components/Global/Footer";
 import { Filter } from "../components/CatalogoPage/Filter";
 import { MainCatalogo } from "../components/CatalogoPage/MainCatalogo";
+
 export function Catalogo() {
   return (
     <>
@@ -19,7 +20,7 @@ export function Catalogo() {
           textColor="white"
         />
       </div>
-      <div className="flex  justify-center gap-10">
+      <div className="flex justify-center gap-10">
         <Filter />
         <MainCatalogo />
       </div>
