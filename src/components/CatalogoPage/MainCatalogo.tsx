@@ -1,39 +1,21 @@
-import axios from "axios";
+import { useState } from "react";
+
 import { CardPets } from "../Global/CardPets";
 import { CardProducts } from "../Global/CardProducts";
-import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import ArrowL from "../../assets/ArrowL.png";
 import ArrowR from "../../assets/ArrowR.png";
 import { useParams } from "react-router";
 import { CardPetsProps } from "../../interface/CardPets";
 import { CardProductsProps } from "../../interface/CardProduct";
+import { MainCatalogoProps } from "../../interface/Maincatalogo";
 
-export function MainCatalogo() {
+export function MainCatalogo({ pets, products }: MainCatalogoProps) {
   const { category } = useParams();
-  const [pets, setPets] = useState<CardPetsProps[]>([]);
-  const [products, setProducts] = useState<CardProductsProps[]>([]);
   const [itemOffset, setItemOffset] = useState(0);
+  
   const itemsPerPage = 15;
-  const api = import.meta.env.VITE_API_URL;
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        if (category === "pet") {
-          const response = await axios.get(`http://${api}/pet/getAll`);
-          setPets(response.data);
-        } else if (category === "products") {
-          const response = await axios.get(`http://${api}/products/getAll`);
-          setProducts(response.data);
-        }
-      } catch (error) {
-        console.error("Erro ao buscar dados:", error);
-      }
-    }
-
-    fetchData();
-  }, [category, api]);
-
+  
   const data = category === "pet" ? pets : products;
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = data.slice(itemOffset, endOffset);
@@ -43,6 +25,7 @@ export function MainCatalogo() {
     const newOffset = (event.selected * itemsPerPage) % data.length;
     setItemOffset(newOffset);
   };
+
 
   return (
     <main className="w-full min-h-screen flex flex-col">

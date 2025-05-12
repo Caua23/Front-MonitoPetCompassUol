@@ -5,7 +5,7 @@ import { PetInfo } from "../../interface/PetInfo";
 import axios from "axios";
 import { CardPetsProps } from "../../interface/CardPets";
 import { CardPets } from "../Global/CardPets";
-import { Modal } from "./modal";
+import { Modal } from "./Modal";
 
 export function PetMain({ id }: { id: string }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,7 +63,7 @@ export function PetMain({ id }: { id: string }) {
           </div>
         )
       }
-      <section className="flex justify-center items-center min-w-full m-5">
+      <section  className="flex justify-center items-center min-w-full m-5">
         <div className="flex flex-col md:flex-row max-w-5xl w-full mt-6 p-6 gap-10 bg-white rounded-lg shadow-md">
           <Anside SLIDES={pet.imgs.map((img) => img.url)} />
           <Information
@@ -81,7 +81,7 @@ export function PetMain({ id }: { id: string }) {
             cert={"Yes"}
             microchip={"Yes"}
             location={pet.location}
-            publishedDate={pet.publishedDate}
+            publishedDate={pet.date}
             additionalInfo={pet.addInformation}
           />
         </div>

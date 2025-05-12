@@ -11,7 +11,7 @@ export function Home() {
         <div className="max-h-screen bg-cover bg-center bg-no-repeat bg-[#FCEED5]"
             style={{ backgroundImage: `url(${banner})` }}
         >
-            <Header />
+            <Header IsFixed={false} />
             <Main />
             <Footer/>
         </div>

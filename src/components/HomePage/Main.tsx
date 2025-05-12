@@ -55,7 +55,7 @@ export function Main() {
 
   return (
     <main className="">
-      <section className="mt-24 ml-32 mb-36">
+      <section className="mt-24 ml-32 mb-[23%]">
         <h1 className="text-6xl font-extrabold text-[#002A48]">
           One more friend
         </h1>

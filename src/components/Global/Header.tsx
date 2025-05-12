@@ -4,13 +4,13 @@ import searchIcon from "../../assets/Search.png";
 // import BandeiraBRL from "../../assets/bandeiraBRL.png";
 // import { ChevronDown } from "lucide-react";
 import { DropdownHeader } from "./DropdownHeader";
-export function Header() {
+export function Header({IsFixed}: {IsFixed: boolean}) {
   const navigate = useNavigate();
 
   return (
-    <header className=" bg-transparent flex justify-center gap-20 items-center   w-[1440px] h-[100px] pt-7 pr-[130px] pb-7 pl-[130px]">
+    <header className={`${IsFixed ? 'fixed' : ''} bg-transparent flex justify-center gap-20 items-center   w-[1440px] h-[100px] pt-7 pr-[130px] pb-7 pl-[130px]`}>
       <div className="flex items-center gap-10">
-        <img src={logo} width="150px" height="50px" alt="" />
+        <img onClick={() => navigate("/")} src={logo} width="150px" height="50px" alt="" className="cursor-pointer"/>
         <ul className="flex text-[#003459] text-base font-bold gap-4 hover:cursor-pointer">
           <li onClick={() => navigate("/")}>
             <a href="">Home</a>
