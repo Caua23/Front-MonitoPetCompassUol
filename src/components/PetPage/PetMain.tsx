@@ -6,6 +6,9 @@ import axios from "axios";
 import { CardPetsProps } from "../../interface/CardPets";
 import { CardPets } from "../Global/CardPets";
 import { Modal } from "./Modal";
+import EmblaCarousel from "../CarroselSecundario/EmblaCarousel"
+import { EmblaOptionsType } from "embla-carousel";
+
 
 export function PetMain({ id }: { id: string }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,6 +54,9 @@ export function PetMain({ id }: { id: string }) {
       </p>
     );
   }
+  const OPTIONS: EmblaOptionsType = { loop: true }
+
+
   return (
     <main>
       {
@@ -95,7 +101,7 @@ export function PetMain({ id }: { id: string }) {
         <div className="flex justify-center items-center">
 
           {/* Carrosel */}
-        
+          <EmblaCarousel slides={pet.imgs.map((img) => img.url)} options={OPTIONS} />
         </div>
       </section>
       <section className="mt-20 mb-20">
