@@ -38,7 +38,7 @@ export function Information({
     <div className="w-full md:w-1/2 md:pl-6 mt-6 md:mt-0">
       <h2 className="text-[28px] font-bold text-gray-800">{name}</h2>
       <p className="text-[24px] font-semibold text-gray-600 mt-2">
-        R$ {price.toLocaleString()}
+        R$ {price.toLocaleString('pt-BR')}
       </p>
       <div className="flex space-x-4 mt-4">
         <button

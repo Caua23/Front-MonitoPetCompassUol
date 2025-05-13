@@ -83,6 +83,7 @@ export function Filter({
               type="checkbox"
               name="color"
               value="Black & White"
+              className="w-4 h-4 rounded-md border border-gray-400 appearance-none cursor-pointer checked:bg-blue-500 checked:border-blue-500"
               checked={color.includes("Black & White")}
               onChange={() => onColorChange("Black & White")}
             />

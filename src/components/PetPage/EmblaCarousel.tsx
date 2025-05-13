@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import type { EmblaOptionsType } from "embla-carousel";
 import { Thumb } from "./EmblaCarouselThumbsButton";
-
+import "./embla.css"
 type PropType = {
   slides: string[];
   options?: EmblaOptionsType;

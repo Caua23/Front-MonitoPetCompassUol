@@ -11,6 +11,7 @@ export function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error , setError] = useState("")
+  const api = import.meta.env.VITE_API_URL;
   const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -22,7 +23,7 @@ export function SignUp() {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/user/auth/signUp", {
+      const response = await axios.post(`http://${api}/user/auth/signUp`, {
         email,
         password,
         name,
@@ -33,7 +34,7 @@ export function SignUp() {
       navigate(`${response.data.redirect}`); 
     } catch (error) {
       console.error(error);
-      setError("Erro ao cadastrar usuário" + error);
+      setError("Erro ao cadastrar usuário");
     }
   };
 
@@ -94,11 +95,12 @@ export function SignUp() {
              {error && <p className="text-red-500 mb-2">{error}</p>}
             <button
               type="submit"
-              className="w-52 border-none rounded-2xl bg-[#003459] text-white p-2 focus:outline-none"
+              className="cursor-pointer w-52 border-none rounded-2xl bg-[#003459] text-white p-2 focus:outline-none"
             >
               Cadastrar
             </button>
           </form>
+          <p>Clique aqui para fazer <a className="text-[#003459]" href="/auth/login">Login</a></p>
         </div>
       </section>
     </main>
