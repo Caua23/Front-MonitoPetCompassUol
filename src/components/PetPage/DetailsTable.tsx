@@ -1,4 +1,4 @@
-export function DetailsTable({ details }: { details: { label: string; value: string }[] }) {
+export function DetailsTable({ details, IsProduct }: { details: { label: string; value: string }[], IsProduct: boolean }) {
 
   const formatValue = (label: string, value: string) => {
     if (!value && label === "Additional Information") {
@@ -9,10 +9,18 @@ export function DetailsTable({ details }: { details: { label: string; value: str
       return `${value} Anos`;
     }
 
-    if (label === "Size") {
+    if (label === "Size" && !IsProduct) {
       return `${value} cm`;
+    }else if (label === "Size" && IsProduct) {
+      return `${value} Kg`;
     }
-
+    if (label === "Published Date") {
+      return new Date(value).toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      });
+    }
     return value;
   };
 

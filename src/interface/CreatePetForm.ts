@@ -8,5 +8,6 @@ export interface CreatePetForm {
   addInformation?: string
   price: number
   location: string
-  category: 'dog' | 'cat'
+  category?: 'dog' | 'cat'
+  product?: string
 }

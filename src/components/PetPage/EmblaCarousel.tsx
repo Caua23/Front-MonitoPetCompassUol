@@ -6,9 +6,10 @@ import "./embla.css"
 type PropType = {
   slides: string[];
   options?: EmblaOptionsType;
+  IsProduct: boolean
 };
 
-const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
+const EmblaCarousel: React.FC<PropType> = ({ slides,IsProduct, options }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel({
@@ -56,7 +57,7 @@ const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
               <img
                 src={src}
                 alt={`Slide ${index + 1}`}
-                className={`w-[476px] h-[350px] ml-10 object-cover rounded-2xl transition-all duration-500 ease-in-out ${
+                className={`${IsProduct ? 'w-auto h-[400px]' : 'w-[476px] h-[350px]' }  ml-10 object-cover rounded-2xl transition-all duration-500 ease-in-out ${
                   index === selectedIndex
                     ? "opacity-100 scale-100 z-10"
                     : "opacity-50 scale-90 w-0 h-0 pointer-events-none z-0"

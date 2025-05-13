@@ -163,7 +163,7 @@ export function Main() {
                 key={product.id}
                 id={product.id}
                 name={product.name}
-                image={product.image}
+                imgsProduct={product.imgsProduct}
                 price={product.price}
                 product={product.product}
               />

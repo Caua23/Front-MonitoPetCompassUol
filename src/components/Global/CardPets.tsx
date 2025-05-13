@@ -15,8 +15,9 @@ export function CardPets({
       onClick={() => {
         window.scrollTo({
           top: 0,
-          behavior: 'smooth'
-        });; navigate(`/pet/${id}`)
+          behavior: "smooth",
+        });
+        navigate(`/pet/${id}`);
       }}
       id={id.toString()}
       className="
@@ -30,7 +31,7 @@ export function CardPets({
           alt={`Picture of ${name}`}
           width={264}
           height={264}
-          className=" object-cover w-[264px] h-[264px]"
+          className=" object-cover w-[264px] h-[264px] rounded"
         />
         <figcaption className="mt-2 font-bold text-[16px] leading-6 text-[#00171F]">
           {name}
@@ -50,7 +51,12 @@ export function CardPets({
           </p>
         </div>
 
-        <p className="text-[#00171F] text-[16px] font-bold mt-1">R$ {price.toLocaleString('pt-BR')}</p>
+        <p className="text-[#00171F] text-[16px] font-bold mt-1">
+          {new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(price)}
+        </p>
       </div>
     </article>
   );

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 export function CardProducts({
   id,
   name,
-  image,
+  imgsProduct,
   price,
   product,
   size,
@@ -13,21 +13,27 @@ export function CardProducts({
   const navigate = useNavigate();
   return (
     <article
-    onClick={() => navigate(`/product/${id}`)}
+      onClick={() => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+        navigate(`/product/${id}`);
+      }}
       id={id.toString()}
       className="
         hover:scale-105 transition-transform duration-500
-        bg-[#ebebeb] w-[280px] h-[440px] p-2 gap-2 rounded-[12px]
-        flex flex-col justify-around items-center
+        bg-[#ebebeb] w-[280px] h-[480px] p-2 gap-2 rounded-[12px]
+        flex flex-col justify-around items-center cursor-pointer
       "
     >
       <figure>
         <img
-          src={image[0].url}
+          src={imgsProduct[0].url}
           alt={`Picture of ${name}`}
           width={264}
           height={264}
-          className="object-cover w-[264px] h-[264px]"
+          className="object-cover w-[264px] h-[264px] rounded"
         />
         <figcaption className="mt-2 ml-2 font-bold text-[16px] leading-6 text-[#00171F]">
           {name}
@@ -47,7 +53,12 @@ export function CardProducts({
           )}
         </div>
 
-        <p className="text-[#00171F] text-[16px] font-bold mt-1">R$ {price}</p>
+        <p className="text-[#00171F] text-[16px] font-bold mt-1">
+          {new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(price)}
+        </p>
 
         <div className="flex cursor-pointer justify-center items-center mt-2 w-[248px] h-[34px] gap-2 rounded-[8px] px-[10px] py-[6px] bg-[#FCEED5]">
           <img className="w-[20px]" src={presentImg} alt="Present icon" />

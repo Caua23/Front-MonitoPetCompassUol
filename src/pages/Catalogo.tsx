@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { CardBanner } from "../components/Global/CardBanner";
 import { Header } from "../components/Global/Header";
 import Banner4 from "../assets/banner4.png";
@@ -25,45 +26,45 @@ export function Catalogo() {
   if (!category) {
     return;
   }
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     async function fetchData() {
-      try {
-        let queryParams = new URLSearchParams();
-  
-        if (male) queryParams.set("gender", "male");
-        if (female) queryParams.set("gender", "female");
-  
-        if (color.length > 0) queryParams.set("color", color.join(","));
-        if (size.length > 0) queryParams.set("size", size.join(","));
-  
-        if (minPrice !== undefined) queryParams.set("minPrice", String(minPrice));
-        if (maxPrice !== undefined) queryParams.set("maxPrice", String(maxPrice));
-  
-        if (category === "pet") {
-          const response = await axios.get(`http://${api}/pet/getAll?${queryParams.toString().toLocaleLowerCase()}`);
-          setPets(response.data);
-        } else if (category === "products") {
-          const response = await axios.get(`http://${api}/products/getAll`);
-          setProducts(response.data);
-        }
-      } catch (error) {
-        console.error("Erro ao buscar dados:", error);
-      }
-    }
-  
+  try {
+    const queryParams = new URLSearchParams();
+
+    if (male) queryParams.set("gender", "male");
+    if (female) queryParams.set("gender", "female");
+
+    if (color.length > 0) queryParams.set("color", color.join(","));
+    if (size.length > 0) queryParams.set("size", size.join(","));
+
+    if (minPrice !== undefined) queryParams.set("priceMin", String(minPrice));
+    if (maxPrice !== undefined) queryParams.set("priceMax", String(maxPrice));
+
+    const url =
+      category === "pet"
+        ? `http://${api}/pet/getAll?${queryParams.toString().toLowerCase()}`
+        : `http://${api}/products/getAll?${queryParams.toString().toLowerCase()}`;
+
+    const response = await axios.get(url);
+    category === "pet" ? setPets(response.data) : setProducts(response.data);
+  } catch (error) {
+    console.error("Erro ao buscar dados:", error);
+  }
+}
+
     fetchData();
-  }, [category, male, female, color, size, minPrice, maxPrice]);  
+  }, [category, male, female, color, size, minPrice, maxPrice, api]);
 
   const MaleChange = (value: boolean) => {
     setMale(value);
     if (value) setFemale(false);
   };
-  
+
   const FemaleChange = (value: boolean) => {
     setFemale(value);
     if (value) setMale(false);
   };
-  
 
   const ColorChange = (colorValue: any) => {
     setColor((prev) =>
@@ -74,12 +75,9 @@ export function Catalogo() {
   };
 
   const SizeChange = (sizeValue: any) => {
-    setSize((prev) =>
-      prev.includes(sizeValue)
-        ? prev.filter((s) => s !== sizeValue)
-        : [...prev, sizeValue]
-    );
+    setSize((prev) => (prev.includes(sizeValue) ? [] : [sizeValue]));
   };
+
   return (
     <>
       <Header IsFixed={false} />
@@ -110,10 +108,7 @@ export function Catalogo() {
           setMinPrice={setMinPrice}
           setMaxPrice={setMaxPrice}
         />
-        <MainCatalogo
-        pets={pets}
-        products={products}
-        />
+        <MainCatalogo pets={pets} products={products} />
       </div>
       <Footer />
     </>
