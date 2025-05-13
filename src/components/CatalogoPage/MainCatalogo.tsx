@@ -5,7 +5,7 @@ import { CardProducts } from "../Global/CardProducts";
 import ReactPaginate from "react-paginate";
 import ArrowL from "../../assets/ArrowL.png";
 import ArrowR from "../../assets/ArrowR.png";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { CardPetsProps } from "../../interface/CardPets";
 import { CardProductsProps } from "../../interface/CardProduct";
 import { MainCatalogoProps } from "../../interface/Maincatalogo";
@@ -13,8 +13,8 @@ import { MainCatalogoProps } from "../../interface/Maincatalogo";
 export function MainCatalogo({ pets, products }: MainCatalogoProps) {
   const { category } = useParams();
   const [itemOffset, setItemOffset] = useState(0);
-  
-  const itemsPerPage = 15;
+  const navigate = useNavigate();
+  const itemsPerPage = 6;
   
   const data = category === "pet" ? pets : products;
   const endOffset = itemOffset + itemsPerPage;
@@ -34,8 +34,10 @@ export function MainCatalogo({ pets, products }: MainCatalogoProps) {
           <p className="text-[#003459] text-2xl font-bold">{category}</p>
           <p className="text-sm">{data.length} Encontrados</p>
         </div>
-        <button className="bg-transparent border border-gray-400 text-gray-400 font-bold mr-15 py-2 px-4 rounded-3xl">
-          Short by popular
+        <button
+          onClick={() => {window.scrollTo(0, 0); navigate(`/catalogo/${category === "pet" ? "products" : "pet"}`)}} 
+        className="cursor-pointer bg-transparent border border-gray-400 text-gray-400 font-bold mr-15 py-2 px-4 rounded-3xl">
+          Go to {category === "pet" ? "Products" : "Pets"}
         </button>
       </div>
 
@@ -58,7 +60,7 @@ export function MainCatalogo({ pets, products }: MainCatalogoProps) {
             <CardProducts
               key={product.id}
               id={product.id}
-              image={product.image}
+              imgsProduct={product.imgsProduct}
               name={product.name}
               price={product.price}
               product={product.product}

@@ -5,11 +5,11 @@ import coracaoPet from "./../../assets/CoracaoPet.png"
 import redes from "./../../assets/redes.png"
 import { Share2 } from "lucide-react";
 import { SlidesProps } from "../../interface/Slides";
-export function Anside({ SLIDES }: SlidesProps) {
+export function Anside({ SLIDES, IsProduct}: SlidesProps ) {
     
     return (
         <aside className="w-[600px] flex flex-col ">
-          <EmblaCarousel slides={SLIDES} />
+          <EmblaCarousel slides={SLIDES} IsProduct={IsProduct} />
           <div
             className="flex items-center mt-5 mb-5 justify-center p-5 gap-15 rounded-2xl w-[560px] h-[48px]"
             style={{

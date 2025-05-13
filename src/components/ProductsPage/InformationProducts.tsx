@@ -1,35 +1,21 @@
 import { MessageCircleIcon } from "lucide-react";
-import { DetailsTable } from "./DetailsTable";
-import { InformationProps } from "../../interface/Information";
+import { DetailsTable } from "../PetPage/DetailsTable";
+import { InformationProductsProps } from "../../interface/InformationProducts";
 
-export function Information({
+export function InformationProducts({
   openModal,
   id,
   name,
   price,
-  gender,
-  age,
   size,
-  color,
-  vaccinated,
-  dewormed,
-  cert,
-  microchip,
-  location,
+  product,
   publishedDate,
   additionalInfo,
-}: InformationProps) {
+}: InformationProductsProps) {
   const details = [
     { label: "SKU", value: `#${id.toString().padStart(7, "0")}` },
-    { label: "Gender", value: gender },
-    { label: "Age", value: age },
     { label: "Size", value: size },
-    { label: "Color", value: color },
-    { label: "Vaccinated", value: vaccinated },
-    { label: "Dewormed", value: dewormed },
-    { label: "Cert", value: cert },
-    { label: "Microchip", value: microchip },
-    { label: "Location", value: location },
+    { label: "Category", value: product},
     { label: "Published Date", value: publishedDate },
     { label: "Additional Information", value: additionalInfo },
   ];
@@ -54,7 +40,7 @@ export function Information({
           Chat with Monito
         </button>
       </div>
-      <DetailsTable details={details} />
+      <DetailsTable details={details} IsProduct={true}/>
     </div>
   );
 }
