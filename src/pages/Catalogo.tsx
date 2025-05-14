@@ -29,29 +29,35 @@ export function Catalogo() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     async function fetchData() {
-  try {
-    const queryParams = new URLSearchParams();
+      try {
+        const queryParams = new URLSearchParams();
 
-    if (male) queryParams.set("gender", "male");
-    if (female) queryParams.set("gender", "female");
+        if (male) queryParams.set("gender", "male");
+        if (female) queryParams.set("gender", "female");
 
-    if (color.length > 0) queryParams.set("color", color.join(","));
-    if (size.length > 0) queryParams.set("size", size.join(","));
+        if (color.length > 0) queryParams.set("color", color.join(","));
+        if (size.length > 0) queryParams.set("size", size.join(","));
 
-    if (minPrice !== undefined) queryParams.set("priceMin", String(minPrice));
-    if (maxPrice !== undefined) queryParams.set("priceMax", String(maxPrice));
+        if (minPrice !== undefined)
+          queryParams.set("priceMin", String(minPrice));
+        if (maxPrice !== undefined)
+          queryParams.set("priceMax", String(maxPrice));
 
-    const url =
-      category === "pet"
-        ? `http://${api}/pet/getAll?${queryParams.toString().toLowerCase()}`
-        : `http://${api}/products/getAll?${queryParams.toString().toLowerCase()}`;
+        const url =
+          category === "pet"
+            ? `http://${api}/pet/getAll?${queryParams.toString().toLowerCase()}`
+            : `http://${api}/products/getAll?${queryParams
+                .toString()
+                .toLowerCase()}`;
 
-    const response = await axios.get(url);
-    category === "pet" ? setPets(response.data) : setProducts(response.data);
-  } catch (error) {
-    console.error("Erro ao buscar dados:", error);
-  }
-}
+        const response = await axios.get(url);
+        category === "pet"
+          ? setPets(response.data)
+          : setProducts(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar dados:", error);
+      }
+    }
 
     fetchData();
   }, [category, male, female, color, size, minPrice, maxPrice, api]);
@@ -81,17 +87,24 @@ export function Catalogo() {
   return (
     <>
       <Header IsFixed={false} />
-      <div className="flex justify-center items-center mb-5">
-        <CardBanner
-          title="One more friend"
-          subtitle="Thousands more fun!"
-          description="Having a pet means you have more joy, a new friend, a happy person who will always be with you to have fun. We have 200+ different pets that can meet your needs!"
-          imageUrl={Banner4}
-          side="left"
-          backgroundColor="bg-[#FFE7BA]"
-          textColor="white"
-        />
+      <div className="flex flex-col ">
+        <p className="text-[#4d4d4daf] text-sm font-bold ml-[70px]">
+        <a href="/">Home</a> &gt; 
+        <a href="/catalogo/pet">Catalogo</a>  &gt;  <a href={`/catalogo/${category}`}>{category}</a>
+        </p>
+        <div className="flex justify-center items-center mb-5">
+          <CardBanner
+            title="One more friend"
+            subtitle="Thousands more fun!"
+            description="Having a pet means you have more joy, a new friend, a happy person who will always be with you to have fun. We have 200+ different pets that can meet your needs!"
+            imageUrl={Banner4}
+            side="left"
+            backgroundColor="bg-[#FFE7BA]"
+            textColor="white"
+          />
+        </div>
       </div>
+      
       <div className="flex justify-center gap-10">
         <Filter
           category={category}
